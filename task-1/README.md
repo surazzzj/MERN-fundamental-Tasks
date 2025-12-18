@@ -1,10 +1,10 @@
-## 🧩 Task 1 - MERN Authentication System (Login / Signup)
+# 🧩 Task 1 - MERN Authentication System (Login / Signup)
 
-# Project Overview
+## Project Overview
 
 This is a full-stack MERN authentication system built with React, Node.js, Express, and MongoDB, designed to provide secure user registration and login functionality. The system implements industry-standard practices including JWT-based authentication, password hashing using bcrypt, and middleware-based route protection. This project serves as a foundational task for mastering MERN stack fundamentals and building secure web applications.
 
-# Key Features
+## Key Features
 
 ✅ User Registration: Allows new users to create an account with validation for required fields.
 
@@ -20,7 +20,7 @@ This is a full-stack MERN authentication system built with React, Node.js, Expre
 
 ✅ Error Handling & Validation: Handles incorrect credentials, duplicate registrations, and missing fields gracefully.
 
-# Tech Stack
+## Tech Stack
 
 * Frontend: React.js, Axios, React Router
 
@@ -28,9 +28,9 @@ This is a full-stack MERN authentication system built with React, Node.js, Expre
 
 * Security: JWT, bcrypt, environment variables (.env) for sensitive data
 
-# Project Workflow
+## Project Workflow
 
-# Frontend (React)
+### Frontend (React)
 
 * Users can sign up and login through responsive forms.
 
@@ -38,13 +38,13 @@ This is a full-stack MERN authentication system built with React, Node.js, Expre
 
 * Protected routes check for a valid token before rendering user-specific pages.
 
-# Backend (Node.js & Express)
+### Backend (Node.js & Express)
 
 * User data is stored in MongoDB with hashed passwords.
 
 * JWT tokens are generated upon successful login and verified in authMiddleware.
 
-# Routes:
+## Routes:
 
 * POST /api/users/register – Register a new user
 
@@ -52,6 +52,6 @@ This is a full-stack MERN authentication system built with React, Node.js, Expre
 
 * GET /api/users/me – Get logged-in user details (protected route)
 
-# Authentication Flow
+## Authentication Flow
 
 * Registration → Password hashing → Save user in DB → Login → JWT issued → Access protected routes
