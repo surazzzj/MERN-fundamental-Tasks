@@ -1,4 +1,4 @@
-# 🧩 Task 1 - MERN Authentication System (Login / Signup)
+# 🧩 Task-1: MERN Authentication System (Login / Signup)
 
 ## Project Overview
 
