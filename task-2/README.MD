@@ -1,5 +1,6 @@
 # 🛒 Task-2: Add to Cart Functionality
 
+## Task Overview
 Task-2 implements a complete Add to Cart system using the MERN stack, focusing on real-world cart operations such as adding products, updating quantities, removing items, and calculating totals.
 This task strengthens backend API design and frontend state synchronization without authentication complexity.
 
