@@ -1,6 +1,6 @@
 # 🧩 Task-1: MERN Authentication System (Login / Signup)
 
-## Project Overview
+## Task Overview
 
 This is a full-stack MERN authentication system built with React, Node.js, Express, and MongoDB, designed to provide secure user registration and login functionality. The system implements industry-standard practices including JWT-based authentication, password hashing using bcrypt, and middleware-based route protection. This project serves as a foundational task for mastering MERN stack fundamentals and building secure web applications.
 
