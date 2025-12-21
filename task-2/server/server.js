@@ -1,24 +1,30 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import connectDb from "./config/mongodb.js";
-import cartRoutes from "./routes/cartRoutes.js"
+  import "./config/env.js";   // ✅ MUST BE FIRST
 
-dotenv.config();
-const app = express();
+  import express from "express";
+  import cors from "cors";
+  import connectDb from "./config/mongodb.js";
+  import cartRoutes from "./routes/cartRoutes.js";
+  import orderRoutes from "./routes/orderRoutes.js";
+  import paymentRoutes from "./routes/paymentRoutes.js";
 
-app.use(express.json());
-app.use(cors());
-connectDb();
+  console.log("ENV CHECK:", process.env.RAZORPAY_KEY_ID);
 
-const port = process.env.Port || 4000;
+  const app = express();
 
-app.get("/", (req,res) => {
-    res.send("Api working....");
-})
+  app.use(express.json());
+  app.use(cors());
+  connectDb();
 
-app.use('/api/cart', cartRoutes);
+  const port = process.env.PORT || 4000;
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-})
+  app.get("/", (req, res) => {
+    res.send("API working...");
+  });
+
+  app.use("/api/cart", cartRoutes);
+  app.use("/api/order", orderRoutes);
+  app.use("/api/payment", paymentRoutes);
+
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });

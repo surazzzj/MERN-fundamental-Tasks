@@ -18,6 +18,39 @@ const Cart = ({ cart, loadCart }) => {
 
   const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
+  const handlePayment = async () => {
+    try {
+      const res = await axios.post(`${backendUrl}/api/payment/create-order`);
+
+      if (!res.data.success || !res.data.order) {
+        alert("Payment failed: Unable to create order");
+        return;
+      }
+
+      const order = res.data.order;
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: "INR",
+        name: "My Shop",
+        description: "Cart Payment",
+        order_id: order.id,
+        handler: async function (response) {
+          await axios.post(`${backendUrl}/api/payment/verify`, response);
+          alert("Payment Successful ✅");
+          loadCart();
+        }
+      };
+
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (error) {
+      console.log("Payment failed", error);
+      alert("Payment failed: " + error.message);
+    }
+  };
+
   return (
     <div className="cart">
       <h2 className="title">🧾 Cart</h2>
@@ -35,14 +68,16 @@ const Cart = ({ cart, loadCart }) => {
             <button onClick={() => updateQty(item.productId, item.qty - 1)}>-</button>
             <span>{item.qty}</span>
             <button onClick={() => updateQty(item.productId, item.qty + 1)}>+</button>
-            <button className="remove" onClick={() => removeItem(item.productId)}>
-              ✕
-            </button>
+            <button className="remove" onClick={() => removeItem(item.productId)}>✕</button>
           </div>
         </div>
       ))}
 
       <h3 className="total">Total: ₹{total}</h3>
+
+      {cart.length > 0 && (
+        <button className="btn" onClick={handlePayment}>Pay Now</button>
+      )}
     </div>
   );
 };

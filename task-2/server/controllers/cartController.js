@@ -1,85 +1,77 @@
 import cartModel from "../models/cartModel.js";
-import jwt from "jsonwebtoken";
 
-const getCart = async (req, res) => {
-    try {
+// GET CART
+export const getCart = async (req, res) => {
+  try {
+    let cart = await cartModel.findOne();
 
-        let cart = await cartModel.findOne();
-        if (!cart) {
-            await cartModel.create({items: [] });
-        }
-
-          res.json({ success: true, items: cart.items });
-
-    } catch (error) {
-        return res.json({ success: false, message: error.message });
+    if (!cart) {
+      cart = await cartModel.create({ items: [] });
     }
-}
 
-const addToCart = async (req, res) => {
-    try {
+    res.json({ success: true, items: cart.items });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
 
-        const { productId, name, price } = req.body;
+// ADD TO CART
+export const addToCart = async (req, res) => {
+  try {
+    const { productId, name, price } = req.body;
 
-        let cart = await cartModel.findOne();
-        if (!cart) {
-            cart = await cartModel.create({ items: [] })
-        }
-
-        const item = cart.items.find(i => i.productId === productId);
-        if (item) {
-            item.qty += 1;
-        } else {
-            cart.items.push({ productId, name, price, qty: 1 });
-        }
-
-        await cart.save();
-        res.json({ success: true, items: cart.items });
-
-    } catch (error) {
-        return res.json({ success: false, message: error.message });
+    let cart = await cartModel.findOne();
+    if (!cart) {
+      cart = await cartModel.create({ items: [] });
     }
-}
 
-const updateQty = async (req, res) => {
-    try {
+    const itemIndex = cart.items.findIndex(
+      (i) => i.productId === productId
+    );
 
-        const { productId, qty } = req.body;
-
-        const cart = await cartModel.findOne();
-        cart.items = cart.items
-        .map(item =>
-            item.productId == productId
-                ? { ...item, qty }
-                : item
-        ).filter(item => item.qty > 0);
-
-        await cart.save();
-         res.json({ success: true, items: cart.items });
-
-    } catch (error) {
-        return res.json({ success: false, message: error.message });
+    if (itemIndex > -1) {
+      cart.items[itemIndex].qty += 1;
+    } else {
+      cart.items.push({ productId, name, price, qty: 1 });
     }
-}
 
-const removeItem = async (req, res) => {
-    try {
+    await cart.save();
+    res.json({ success: true, items: cart.items });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
 
-        const { productId } = req.params;
+// UPDATE QTY
+export const updateQty = async (req, res) => {
+  try {
+    const { productId, qty } = req.body;
 
-        const cart = await cartModel.findOne();
-        cart.items = cart.items.filter(item =>
-            item.productId !== productId
-        )
+    const cart = await cartModel.findOne();
+    const item = cart.items.find((i) => i.productId === productId);
 
-        await cart.save();
-       res.json({ success: true, items: cart.items });
+    if (item) item.qty = qty;
 
-    } catch (error) {
-        return res.json({ success: false, message: error.message });
-    }
-}
+    await cart.save();
+    res.json({ success: true, items: cart.items });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
 
+// REMOVE ITEM
+export const removeItem = async (req, res) => {
+  try {
+    const { productId } = req.params;
 
-export { getCart, addToCart, updateQty, removeItem }
+    const cart = await cartModel.findOne();
+    cart.items = cart.items.filter(
+      (item) => item.productId !== productId
+    );
 
+    await cart.save();
+    res.json({ success: true, items: cart.items });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
