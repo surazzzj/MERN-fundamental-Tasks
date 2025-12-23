@@ -4,6 +4,9 @@ import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import Cart from "../components/Cart";
 import { products } from "../assets/assets";
+import { Link } from "react-router-dom";
+
+
 import "../App.css";
 
 const Home = () => {
@@ -27,7 +30,16 @@ const Home = () => {
 
   return (
     <div className="container">
+      {/* <h2 className="title">🛍 Products</h2> */}
+
+          {/* 🔗 Navigation Bar */}
+    <div className="nav-bar">
       <h2 className="title">🛍 Products</h2>
+
+      <Link to="/orders" className="orders-btn">
+        📦 Order History
+      </Link>
+    </div>
 
       <div className="products-grid">
         {products.map((product) => (

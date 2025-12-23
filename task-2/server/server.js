@@ -7,8 +7,6 @@
   import orderRoutes from "./routes/orderRoutes.js";
   import paymentRoutes from "./routes/paymentRoutes.js";
 
-  console.log("ENV CHECK:", process.env.RAZORPAY_KEY_ID);
-
   const app = express();
 
   app.use(express.json());
