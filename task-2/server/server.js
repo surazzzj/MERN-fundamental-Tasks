@@ -1,4 +1,4 @@
-  import "./config/env.js";   // ✅ MUST BE FIRST
+  import "./config/env.js";  
 
   import express from "express";
   import cors from "cors";

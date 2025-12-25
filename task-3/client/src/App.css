@@ -1,0 +1,140 @@
+/* ---------- GLOBAL ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: #f4f6f8;
+  color: #333;
+}
+
+/* ---------- HEADINGS ---------- */
+h2 {
+  text-align: center;
+  margin: 24px 0;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ---------- FORM ---------- */
+form {
+  max-width: 420px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #0d6efd;
+}
+
+/* ---------- BUTTONS ---------- */
+button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0d6efd;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #0b5ed7;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ---------- PRODUCT LIST GRID ---------- */
+div {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ---------- PRODUCT CARD ---------- */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  width: 250px;
+  vertical-align: top;
+}
+
+/* ---------- PRODUCT IMAGE ---------- */
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* ---------- PRODUCT TEXT ---------- */
+.card h4 {
+  margin: 6px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ---------- CARD BUTTONS ---------- */
+.card button {
+  margin-top: 8px;
+  margin-bottom: 6px;
+}
+
+/* Delete button */
+.card button:last-child {
+  background: #dc3545;
+}
+
+.card button:last-child:hover {
+  background: #bb2d3b;
+}
+
+/* Edit button */
+.card button:first-of-type {
+  background: #198754;
+}
+
+.card button:first-of-type:hover {
+  background: #157347;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    margin: 12px auto;
+  }
+}
