@@ -16,9 +16,17 @@ This implementation strengthens backend API design, frontend–backend synchroni
 
 ❌ Remove items from cart
 
-💰 Real-time cart total calculation
+💰 Real-time cart total calculation 
 
-🔁 Persistent cart data fetched via backend APIs
+✅ Order creation after successful payment
+
+📦 Order details stored with product snapshot
+
+📜 Fetch all orders API
+
+🔍 View individual order details
+
+⏱️ Timestamped order records
 
 ### 💳 Payment Gateway (Razorpay)
 
