@@ -1,0 +1,25 @@
+// import multer from "multer";
+// import { CloudinaryStorage } from "multer-storage-cloudinary";
+// import cloudinary from "./cloudinary.js";
+
+// const storage = new CloudinaryStorage({
+//     cloudinary,
+//     params: {
+//         folder: "products",
+//         allowed_formats: ["jpg", "png", "jpeg"],
+//     },
+// });
+
+// const upload = multer({ storage });
+
+// export default upload;
+
+
+
+import multer from "multer";
+
+const storage = multer.diskStorage({});
+
+const upload = multer({ storage });
+
+export default upload;

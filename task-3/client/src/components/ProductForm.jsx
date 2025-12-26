@@ -3,63 +3,119 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 
 const ProductForm = ({ loadProducts, editProduct, setEditProduct }) => {
-
   const { backendUrl } = useContext(AppContext);
 
   const [form, setForm] = useState({
     name: "",
     price: "",
-    image: "",
-    description: ""
+    description: "",
+    image: null,
   });
 
+  // Populate form when editing
   useEffect(() => {
     if (editProduct) {
-      setForm(editProduct);
+      setForm({
+        name: editProduct.name,
+        price: editProduct.price,
+        description: editProduct.description,
+        image: null, 
+      });
     }
   }, [editProduct]);
 
+  // Handle text inputs
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle file input separately
+  const imageHandler = (e) => {
+    setForm((prev) => ({
+      ...prev,
+      image: e.target.files[0],
+    }));
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     try {
+      const data = new FormData();
+      data.append("name", form.name);
+      data.append("price", form.price);
+      data.append("description", form.description);
+
+      if (form.image) {
+        data.append("image", form.image);
+      }
 
       if (editProduct) {
         await axios.put(
-          backendUrl + `/api/products/update/${editProduct._id}`,
-          form
+          `${backendUrl}/api/products/update/${editProduct._id}`,
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
         setEditProduct(null);
       } else {
-        await axios.post(backendUrl + "/api/products/add", form);
+        await axios.post(
+          `${backendUrl}/api/products/add`,
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
       }
 
       setForm({
         name: "",
         price: "",
-        image: "",
-        description: ""
+        description: "",
+        image: null,
       });
 
       loadProducts();
-
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <input name="name" onChange={changeHandler} placeholder="Name" value={form.name} />
-      <input name="price" onChange={changeHandler} placeholder="Price" value={form.price} />
-      <input name="image" onChange={changeHandler} placeholder="Image URL" value={form.image} />
-      <input name="description" onChange={changeHandler} placeholder="Description" value={form.description} />
+    <form className="form" onSubmit={submitHandler}>
+      <input
+        name="name"
+        type="text"
+        placeholder="Product Name"
+        value={form.name}
+        onChange={changeHandler}
+        required
+      />
 
-      <button>{editProduct ? "Update Product" : "Add Product"}</button>
+      <input
+        name="price"
+        type="number"
+        placeholder="Price"
+        value={form.price}
+        onChange={changeHandler}
+        required
+      />
+
+      <textarea
+        name="description"
+        placeholder="Description"
+        value={form.description}
+        onChange={changeHandler}
+        required
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={imageHandler}
+      />
+
+      <button type="submit">
+        {editProduct ? "Update Product" : "Add Product"}
+      </button>
     </form>
   );
 };

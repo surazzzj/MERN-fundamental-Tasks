@@ -3,12 +3,11 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 
 const ProductList = ({ products, loadProducts, setEditProduct }) => {
-
   const { backendUrl } = useContext(AppContext);
 
   const del = async (id) => {
     try {
-      await axios.delete(backendUrl + `/api/products/delete/${id}`);
+      await axios.delete(`${backendUrl}/api/products/delete/${id}`);
       loadProducts();
     } catch (error) {
       console.log(error.message);
@@ -16,26 +15,19 @@ const ProductList = ({ products, loadProducts, setEditProduct }) => {
   };
 
   return (
-    <div>
+    <div className="products-grid">
       {products.map((p) => (
         <div className="card" key={p._id}>
-
-          {p.image && (
-            <img
-              src={p.image}
-              alt={p.name}
-              style={{ width: "150px", display: "block" }}
-            />
-          )}
+          <img src={p.image} alt={p.name} className="product-img" />
 
           <h4>{p.name}</h4>
-          <p>₹{p.price}</p>
+          <p className="price">₹{p.price}</p>
+          <p className="desc">{p.description}</p>
 
-          {p.description && <p>{p.description}</p>}
-
-          <button onClick={() => setEditProduct(p)}>Edit</button>
-
-          <button onClick={() => del(p._id)}>Delete</button>
+          <div className="actions">
+            <button onClick={() => setEditProduct(p)}>Edit</button>
+            <button className="danger" onClick={() => del(p._id)}>Delete</button>
+          </div>
         </div>
       ))}
     </div>
