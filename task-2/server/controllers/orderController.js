@@ -28,19 +28,6 @@ export const placeOrder = async (req, res) => {
   }
 };
 
-// export const getOrders = async (req, res) => {
-//   try {
-//     const orders = await orderModel.find();
-//     res.json({ success: true, orders });
-//   } catch (error) {
-//     res.json({ success: false, message: error.message });
-//   }
-// };
-
-
-
-
-
 // GET ALL ORDERS
 export const getOrders = async (req, res) => {
   const orders = await orderModel.find().sort({ createdAt: -1 });
