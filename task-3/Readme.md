@@ -16,6 +16,14 @@ The admin can add, view, update, and delete products, including product details 
 
 ❌ Delete products
 
+📤 Image upload handled via Multer
+
+☁️ Images stored securely on Cloudinary
+
+🔗 Cloudinary URLs saved in MongoDB
+
+🗂️ MVC pattern (Models, Controllers, Routes)
+
 🔁 Real-time UI refresh after every action
 
 🧩 Modular React components (Form & List)
