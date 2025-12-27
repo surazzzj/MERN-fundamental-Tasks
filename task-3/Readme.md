@@ -22,8 +22,6 @@ The admin can add, view, update, and delete products, including product details 
 
 🔗 Cloudinary URLs saved in MongoDB
 
-🗂️ MVC pattern (Models, Controllers, Routes)
-
 🔁 Real-time UI refresh after every action
 
 🧩 Modular React components (Form & List)
