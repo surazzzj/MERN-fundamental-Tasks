@@ -22,7 +22,7 @@ This is a full-stack MERN authentication system built with React, Node.js, Expre
 
 ## Tech Stack
 
-* Frontend: React.js, Axios, React Router
+* Frontend: React.js, Axios, React Router Dom
 
 * Backend: Node.js, Express.js, MongoDB, Mongoose
 
